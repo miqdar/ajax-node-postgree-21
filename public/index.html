@@ -1,0 +1,483 @@
+<html>
+
+<head>
+  <title>Belajar jQuery</title>
+  <script src="javascripts/jquery.js"></script>
+  <link rel="stylesheet" href="./stylesheets/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <script src="./javascripts/bootstrap.min.js"
+    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+    crossorigin="anonymous"></script>
+  <script src="./javascripts/moment.js"></script>
+  <script src="./javascripts/moment-with-locales.js"></script>
+
+</head>
+
+<body>
+  <div class="container">
+    <h2>Data</h2>
+    <table class="table table-striped table-view">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">String</th>
+          <th scope="col">Integer</th>
+          <th scope="col">Float</th>
+          <th scope="col">Date</th>
+          <th scope="col">Boolean</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+
+
+      </tbody>
+    </table>
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <li class="page-data"><a class="page-link" href="/">1</a></li>
+
+      </ul>
+    </nav>
+
+    <br>
+    <hr><br>
+    <h2>Masukan Data</h2>
+    <form id="formAdd">
+      <div class="form-group row">
+        <label for="inputEmail3" class="col-sm-2 col-form-label">String</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="string" name="string" placeholder="String">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputEmail3" class="col-sm-2 col-form-label">Integer</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="integer" name="integer" placeholder="Integer">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputEmail3" class="col-sm-2 col-form-label">Float</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="float" name="float" placeholder="Float">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputEmail3" class="col-sm-2 col-form-label">Date</label>
+        <div class="col-sm-10">
+          <input type="date" class="form-control" id="date" name="date" placeholder="end date">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputEmail3" class="col-sm-2 col-form-label">Boolean</label>
+        <div class="col-sm-10">
+          <select class="custom-select" name="boolean" id="boolean">
+
+            <option value="true">True</option>
+            <option value="false">False</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-10">
+          <button type="submit" class="btn btn-primary btn-submit">Submit</button>
+        </div>
+      </div>
+    </form>
+
+    <!-- filter Form -->
+    <br>
+    <hr><br>
+    <h2>Filter Data</h2>
+    <form id="formFilter">
+
+      <div class="form-group row">
+        <label for="inputEmail3" class="col-sm-2 col-form-label">String</label>
+        <input type="checkbox" id="stringChooice">
+        <input type="text" placeholder="String" style="margin-left: 20px;" size="50px" name="stringFilter" id="stringFilter">
+      </div>
+      <div class="form-group row">
+        <label for="inputEmail3" class="col-sm-2 col-form-label">Integer</label>
+        <input type="checkbox" id="integerChooice">
+        <input type="text" placeholder="Integer" style="margin-left: 20px;" size="50px" name="integerFilter" id="integerFilter">
+      </div>
+      <div class="form-group row">
+        <label for="inputEmail3" class="col-sm-2 col-form-label">Float</label>
+        <input type="checkbox" name="floatChooice" id="floatChooice">
+        <input type="text" placeholder="Float" style="margin-left: 20px;" size="50px" name="floatFilter" id="floatFilter">
+      </div>
+      <div class="form-group row">
+        <label for="inputEmail3" class="col-sm-2 col-form-label">Date</label>
+        <input type="checkbox" name="dateChooice" id="dateChooice">
+        <span style="margin-left: 20px; padding-top: 10px;">From</span>
+          <input type="date" placeholder="start date" style="margin-left: 20px;" name="startDate" id="startDate">
+        <span style="vertical-align: middle; margin-left: 20px; padding-top: 10px;">to</span>
+          <input type="date" placeholder="end date" style="margin-left: 20px;" name="endDate" id="endDate">
+      </div>
+      <div class="form-group row">
+        <label for="inputEmail3" class="col-sm-2 col-form-label">Boolean</label>
+        <input type="checkbox" name="booleanChooice" id="booleanChooice">
+        <select name="boolean" style="margin-left: 20px;" id="booleanFilter">
+          <option selected>Choose the boolean...</option>
+          <option value="true">True</option>
+          <option value="false">False</option>
+        </select>
+
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-10">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+    </form>
+
+  </div>
+
+  <!-- Edit Modal -->
+  <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit Data</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+          <form id="formEdit">
+            <div class="form-group row">
+              <label for="inputEmail3" class="col-sm-2 col-form-label">String</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="idEdit" name="id">
+                <input type="text" class="form-control" id="stringEdit" name="string">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="inputEmail3" class="col-sm-2 col-form-label">Integer</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="integerEdit" name="integer">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="inputEmail3" class="col-sm-2 col-form-label">Float</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="floatEdit" name="float">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="inputEmail3" class="col-sm-2 col-form-label">Date</label>
+              <div class="col-sm-10">
+                <input type="date" class="form-control" id="dateEdit" name="date">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="inputEmail3" class="col-sm-2 col-form-label">Boolean</label>
+              <div class="col-sm-10">
+                <select class="custom-select" name="boolean" id="booleanEdit">
+
+                  <option value="true">True</option>
+                  <option value="false">False</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-sm-10">
+                <button type="submit" class="btn btn-primary">Update</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Filter -->
+
+  </div>
+
+  <!-- Filter Modal -->
+  <div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Hasil Filter Data</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+          <table class="table table-striped" id="filterTable">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">String</th>
+                <th scope="col">Integer</th>
+                <th scope="col">Float</th>
+                <th scope="col">Date</th>
+                <th scope="col">Boolean</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+
+
+            </tbody>
+          </table>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+</body>
+
+<script type="text/javascript">
+  const URL_API = "http://localhost:3000/murid"
+
+  $(document).ready(() => {
+    readData()
+
+    $('#formAdd').submit((event) => {
+      event.preventDefault()
+      const string = $('#string').val()
+      const integer = $('#integer').val()
+      const float = $('#float').val()
+      const date = $('#date').val()
+      const boolean = $('#boolean').val()
+      addData(string, integer, float, date, boolean)
+      $('#string').val('')
+      $('#integer').val('')
+      $('#float').val('')
+      $('#date').val('')
+      $('#boolean').val('')
+    })
+
+    $('#formEdit').submit((event) => {
+      event.preventDefault()
+      const id = $('#idEdit').val()
+      const string = $('#stringEdit').val()
+      const integer = $('#integerEdit').val()
+      const float = $('#floatEdit').val()
+      const date = $('#dateEdit').val()
+      const boolean = $('#booleanEdit').val()
+      updateData(id, string, integer, float, date, boolean)
+      $('#idEdit').val('')
+      $('#stringEdit').val('')
+      $('#integerEdit').val('')
+      $('#floatEdit').val('')
+      $('#dateEdit').val('')
+      $('#booleanEdit').val('')
+
+      $('#editModal').modal('toggle');
+    })
+
+    $('#formFilter').submit((event) => {
+      event.preventDefault()
+      let string = "??"
+      let integer = "999"
+      let float = "999"
+      let boolean = ""
+      let startDate = ""
+      let endDate = ""
+      
+      if ($('#stringChooice').is(':checked') ) {
+        string = $('#stringFilter').val()
+      }
+      if ($('#integerChooice').is(':checked') ) {
+        integer = $('#integerFilter').val()
+      }
+      if ($('#floatChooice').is(':checked') ) {
+        float = $('#floatFilter').val()
+      }
+      if ($('#booleanChooice').is(':checked') ) {
+        boolean = $('#booleanFilter').val()
+      }
+      if ($('#dateChooice').is(':checked') ) {
+        startDate = $('#startDate').val()
+        endDate = $('#endDate').val()
+      }
+      filterData(string, integer, float, boolean, startDate, endDate)
+      $('#filterModal').modal()
+
+      $('#stringFilter').val('')
+      $('#integerFilter').val('')
+      $('#floatFilter').val('')
+      $('#dateFilter').val('')
+      $('#booleanFilter').val('')
+    })
+
+    $("table tbody").on("click", ".btn-delete", function () {
+      deleteData($(this).attr('dataid'));
+    })
+
+    $("table tbody").on("click", ".btn-edit", function () {
+      editData($(this).attr('dataid'));
+    })
+
+    $("body nav").on("click", "#page", function () {
+      event.preventDefault()
+      page($(this).attr('dataPage'))
+    })
+
+    $("#filterTable tbody").on("click", ".btn-edit-modal", function () {
+      $('#filterModal').modal('hide');
+    })
+
+  })
+
+  const readData = (hal) => {
+    $.ajax({
+      method: "GET",
+      url: `${URL_API}/p/1`
+    }).done(function (data) {
+      let html = "";
+      let html2 = "";
+      data.obj.forEach((item, index) => {
+        html += `
+        <tr>
+          <th scope="row">${index +1}</th>
+          <td>${item.string}</td>
+          <td>${item.integer}</td>
+          <td>${item.float}</td>
+          <td>${moment(item.date).format("dddd, D MMMM YYYY")}</td>
+          <td>${item.boolean}</td>
+          <td>
+            <button type="button" class="btn btn-primary btn-edit" dataid="${item.id}" data-toggle="modal" data-target="#editModal">EDIT</button>
+            <button type="button" class="btn btn-danger btn-delete" dataid="${item.id}">DELETE</button></td>
+        </tr>
+        `
+      })
+      for (i = 1; i <= Math.ceil(data.jumlah / 3); i++) {
+        html2 += `
+          <li class="page-data"><a class="page-link" href="" dataPage="${i}" id="page">${i}</a></li>
+          `;
+      }
+      $('nav ul').html(html2)
+      $('.table-view tbody').html(html)
+    }).fail(function (jqXHR, textStatus) {
+      alert("Read Data Failed: " + textStatus);
+    })
+  }
+
+  const page = (hal) => {
+    $.ajax({
+      method: "GET",
+      url: `${URL_API}/p/${hal}`
+    }).done(function (data) {
+      let html = "";
+      data.obj.forEach((item, index) => {
+        html += `
+        <tr>
+          <th scope="row">${index + data.start + 1}</th>
+          <td>${item.string}</td>
+          <td>${item.integer}</td>
+          <td>${item.float}</td>
+          <td>${moment(item.date).format("dddd, D MMMM YYYY")}</td>
+          <td>${item.boolean}</td>
+          <td>
+            <button type="button" class="btn btn-primary btn-edit" dataid="${item.id}" data-toggle="modal" data-target="#editModal">EDIT</button>
+            <button type="button" class="btn btn-danger btn-delete" dataid="${item.id}">DELETE</button></td>
+        </tr>
+        `
+      })
+      $('table tbody').html(html)
+    }).fail(function (jqXHR, textStatus) {
+      alert("Read Data Failed: " + textStatus);
+    })
+  }
+
+  const addData = (string, integer, float, date, boolean) => {
+    $.ajax({
+      method: "POST",
+      url: URL_API,
+      data: { string, integer, float, date, boolean }
+    }).done(function (data) {
+      readData()
+    }).fail(function (jqXHR, textStatus) {
+      alert("Add Data failed: " + textStatus);
+    })
+  }
+
+  const deleteData = (id) => {
+    $.ajax({
+      method: "DELETE",
+      url: `${URL_API}/${id}`
+    }).done(function (data) {
+      readData()
+    }).fail(function (jqXHR, textStatus) {
+      alert("Request failed: " + textStatus);
+    })
+  }
+
+  const editData = (id) => {
+    $.ajax({
+      method: "GET",
+      url: `${URL_API}/${id}`,
+    }).done(function (data) {
+      data.forEach(item => {
+        $('#stringEdit').val(item.string)
+        $('#integerEdit').val(item.integer)
+        $('#floatEdit').val(item.float)
+        // $('#date').val(item.date)    // isi data date belum bisa
+        // $('#boolean').select(item.boolean)   // isi boolean blm bisa
+        $('#idEdit').val(id)
+        $('#idEdit').hide()
+      })
+    }).fail(function (jqXHR, textStatus) {
+      alert("Request failed: " + textStatus);
+    })
+  }
+
+  const updateData = (id, string, integer, float, date, boolean) => {
+    $.ajax({
+      method: "PUT",
+      url: `${URL_API}/${id}`,
+      data: { string, integer, float, date, boolean }
+    }).done(function (data) {
+      readData()
+    }).fail(function (jqXHR, textStatus) {
+      alert("Update Data failed: " + textStatus);
+    })
+  }
+
+  const filterData = (string, integer, float, boolean, startDate, endDate) => {
+    $.ajax({
+      method: "POST",
+      url: `${URL_API}/f/`,
+      data: { string, integer, float, boolean, startDate, endDate }
+    }).done(function (data) {
+      let html = "";
+      for (i = 0; i < data.length; i++) {
+        html += `
+        <tr>
+          <th scope="row">${data[i].id}</th>
+          <td>${data[i].string}</td>
+          <td>${data[i].integer}</td>
+          <td>${data[i].float}</td>
+          <td>${data[i].date}</td>
+          <td>${data[i].boolean}</td>
+          <td>
+            <button type="button" class="btn btn-primary btn-edit-modal" dataid="${data[i].id}" data-toggle="modal" data-target="#editModal">EDIT</button>
+            <button type="button" class="btn btn-danger btn-delete" dataid="${data[i].id}">DELETE</button></td>
+        </tr>
+        `
+      }
+      $('#filterTable tbody').html(html)
+    }).fail(function (jqXHR, textStatus) {
+      alert("Filter Data failed: " + textStatus);
+    })
+  }
+</script>
+
+</html>
